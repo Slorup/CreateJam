@@ -22,6 +22,13 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UndergroundGrid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/OvergroundGrid.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="21mvgG4Sn0ecyQzjQ6UiEjw6TqT" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="21mvgG4Sn0ecyQzjQ6UiEjw6TqT" />
@@ -30,6 +37,9 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.3501355" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.027072757" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.027072757" />
     <property name="Discover.Launch.Via.Unity" value="true" />
@@ -75,6 +85,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1638559189255</updated>
+      <workItem from="1638559194918" duration="5420000" />
+      <workItem from="1638611308118" duration="72000" />
+      <workItem from="1638614677004" duration="6233000" />
       <workItem from="1638559194918" duration="4872000" />
       <workItem from="1638607125053" duration="15345000" />
       <workItem from="1638624484295" duration="3127000" />

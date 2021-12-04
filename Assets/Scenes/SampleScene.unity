@@ -531,14 +531,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 32
   height: 128
-  startHeight: 30
-  cloudChance: 0.2
-  cloud1Chance: 0.33
-  cloud2Chance: 0.66
+  startHeight: 10
+  cloudChance: 0.7
+  doubleCloudChance: 0.3
+  cloud1Chance: 0.2
+  cloud2Chance: 0.6
   cloud3Chance: 1
   cloud1: {fileID: 6997549654468479768, guid: d31dd648a05aefb77923701368c589f5, type: 3}
   cloud2: {fileID: 3533372614309225879, guid: b7c879736bcc09de5a9f266bbeec0f1d, type: 3}
   cloud3: {fileID: 22171624146236185, guid: 5f964c74a078c94a98fe105b848ad569, type: 3}
+  cloudTop: {fileID: 3799354398860539058, guid: a8aeeea1ddefee81f8edfa25ecfac425, type: 3}
+  pillar: {fileID: 3814427662368282177, guid: f13cb68ffd699eaea9ffe83e3fd756bb, type: 3}
 --- !u!1 &1901150535
 GameObject:
   m_ObjectHideFlags: 0

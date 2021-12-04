@@ -3,7 +3,12 @@ guid: 0a930047f6862e82a879e6b5e75a54d8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - cloud1: {fileID: 6997549654468479768, guid: d31dd648a05aefb77923701368c589f5, type: 3}
+  - cloud2: {fileID: 3533372614309225879, guid: b7c879736bcc09de5a9f266bbeec0f1d, type: 3}
+  - cloud3: {fileID: 22171624146236185, guid: 5f964c74a078c94a98fe105b848ad569, type: 3}
+  - cloudTop: {fileID: 3799354398860539058, guid: a8aeeea1ddefee81f8edfa25ecfac425, type: 3}
+  - pillar: {fileID: 801068048499336651, guid: f13cb68ffd699eaea9ffe83e3fd756bb, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
