@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     public Text goldText;
     public Text marbleText;
+    public Text heightText;
 
     // Start is called before the first frame update
     void Start()
@@ -86,6 +87,23 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
             TeleportToHighestPillar();
+        
+        
+        setHeightText();
+    }
+
+    private void setHeightText()
+    {
+        float height = transform.position.y * 1.8f;
+        heightText.text = Mathf.Round(height) + " m";
+        if (height <= 0)
+        {
+            heightText.color = Color.red;
+        }
+        else
+        {
+            heightText.color = Color.green;
+        }
     }
 
     private void TeleportToHighestPillar()
