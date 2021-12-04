@@ -216,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1382854796}
   - component: {fileID: 1382854795}
+  - component: {fileID: 1382854797}
   m_Layer: 0
   m_Name: GridController
   m_TagString: Untagged
@@ -252,3 +253,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1382854797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382854794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a930047f6862e82a879e6b5e75a54d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 32
+  height: 128
+  startHeight: 30
+  cloudChance: 0.2
+  cloud1Chance: 0.33
+  cloud2Chance: 0.66
+  cloud3Chance: 1
+  cloud1: {fileID: 6997549654468479768, guid: d31dd648a05aefb77923701368c589f5, type: 3}
+  cloud2: {fileID: 3533372614309225879, guid: b7c879736bcc09de5a9f266bbeec0f1d, type: 3}
+  cloud3: {fileID: 22171624146236185, guid: 5f964c74a078c94a98fe105b848ad569, type: 3}
