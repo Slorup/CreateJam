@@ -5,34 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e78f76d1-9388-4209-8ae5-9265e9e198b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Dirt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dirt.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Gold.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Gold.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Gold.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Marble.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Marble.jpg.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Marble.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Marble.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/OvergroundGrid.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/OvergroundGrid.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/cloud1.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/cloud1.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/cloud2.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/cloud2.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/cloud2_trans.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/cloud2_trans.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/cloud3.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/cloud3.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CreateJam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CreateJam/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Block.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Gold.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Block.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dirt.prefab.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Dirt.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dirt.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Gold.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Gold.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Marble.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Marble.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UndergroundGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UndergroundGrid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +83,7 @@
       <updated>1638559189255</updated>
       <workItem from="1638559194918" duration="4872000" />
       <workItem from="1638607125053" duration="15345000" />
-      <workItem from="1638624484295" duration="1677000" />
+      <workItem from="1638624484295" duration="2824000" />
     </task>
     <servers />
   </component>

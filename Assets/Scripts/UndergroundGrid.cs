@@ -42,7 +42,7 @@ public class UndergroundGrid : MonoBehaviour
                         block = dirt;
 
                     var newBlock = Instantiate(block, new Vector3(x, -y, 0), Quaternion.identity, blocksGO.transform);
-                    newBlock.gameObject.AddComponent<BoxCollider2D>();
+                    
                     newBlock.GetComponent<SpriteRenderer>().flipX = Random.value > 0.5;
                     newBlock.GetComponent<SpriteRenderer>().flipY = Random.value > 0.5;
                     newBlock.transform.rotation = Quaternion.Euler(0,0, Mathf.FloorToInt(Random.Range(0, 3)) * 90);
