@@ -29,7 +29,7 @@ public class OvergroundGrid : MonoBehaviour
         //Instantiate(pillar, new Vector3(21,2), Quaternion.identity);
 
         Instantiate(cloud3, new Vector3(2, 2), Quaternion.identity);
-        Instantiate(rema, new Vector3(10, 1), Quaternion.identity);
+        //Instantiate(rema, new Vector3(10, 1), Quaternion.identity);
 
 
         int firstRemaLocation = Mathf.RoundToInt(Random.Range(5f, width-6));

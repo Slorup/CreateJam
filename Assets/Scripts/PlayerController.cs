@@ -8,7 +8,20 @@ using UnityEditor.U2D;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 using Random = UnityEngine.Random;
+
+class BagO2
+{
+    public Transform bag;
+    public float o2;
+
+    public BagO2(Transform _bag, float _o2)
+    {
+        bag = _bag;
+        o2 = _o2;
+    }
+}
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public static float JUMPFORCE = 190;
     public static float JUMPTIMEDELAY = 0.1f; //Seconds
     public static float MAXHORIZONTALVELOCITY = 5;
-    public static float HOLDBEFOREDIG = 0.2f; //Seconds
+    public float HOLDBEFOREDIG = 0.5f; //Seconds
     public static float PILLARPLACEMENTCOOLDOWN = 0.2f; //Seconds
     public static int PILLARCOST = 1; //MARBLE
 
@@ -42,8 +55,8 @@ public class PlayerController : MonoBehaviour
     private float holdLeftTime;
     private float holdRightTime;
 
-    private int marble;
-    private int gold;
+    public int marble;
+    public int gold;
 
     public Sprite idleSprite;
     public Sprite leftSprite;
@@ -57,9 +70,19 @@ public class PlayerController : MonoBehaviour
     public Text marbleText;
     public Text heightText;
 
+    public Image HurtImage;
+    
+    public GameObject bagsOBJ;
+    public GameObject bagPrefab;
+    private List<BagO2> bags = new List<BagO2>();
+
+    public float oxygenDecay;
+
     // Start is called before the first frame update
     void Start()
     {
+        AddBag();
+        
         gameObject.GetComponent<SpriteRenderer>().sprite = idleSprite;
         lastJumpTime = Time.time;
         timeStandStill = 0;
@@ -71,6 +94,13 @@ public class PlayerController : MonoBehaviour
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
+    public void AddBag()
+    {
+        var b = Instantiate(bagPrefab, bagsOBJ.transform);
+        b.transform.localPosition = bags.Count * Vector2.left * 100f;
+        bags.Add(new BagO2(b.transform.Find("Square"), 0.0f));
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -78,6 +108,35 @@ public class PlayerController : MonoBehaviour
 
         goldText.text = gold.ToString();
         marbleText.text = marble.ToString();
+
+
+        var o2loss = oxygenDecay * Mathf.Abs(transform.position.y) * Time.deltaTime;
+        foreach (var b in bags)
+        {
+            b.o2 -= Mathf.Min(o2loss, b.o2);
+            o2loss -= Mathf.Min(o2loss, b.o2);
+
+            b.bag.localPosition = new Vector3(b.bag.localPosition.x, -(1.0f - b.o2) * 0.9f - 0.42f, 1.0f);
+
+            if (Mathf.Abs(transform.position.y) < 10f)
+                b.o2 = 1.0f;
+        }
+
+        if (o2loss > 0f)
+        {
+            // TODO: DIE
+        }
+
+        if (bags.Last().o2 < 0.5f)
+        {
+            var c = HurtImage.color;
+            HurtImage.color = new Color(c.r, c.g, c.b, 0.5f - bags.Last().o2);
+        }
+        else
+        {
+            var c = HurtImage.color;
+            HurtImage.color = new Color(c.r, c.g, c.b, 0.0f);
+        }
     }
 
     private void Update()
@@ -259,6 +318,26 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(raycastHit2D.collider.name);
         return raycastHit2D;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        RemaController rc;
+        if (other.TryGetComponent<RemaController>(out rc))
+        {
+            rc.player = this;
+            rc.OpenMenu();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        RemaController rc;
+        if (other.TryGetComponent<RemaController>(out rc))
+        {
+            rc.CloseMenu();
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D other)
     {
