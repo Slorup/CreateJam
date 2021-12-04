@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BagsLeft: 1
+  player: {fileID: 0}
 --- !u!61 &236109732535924975
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -326,6 +327,14 @@ PrefabInstance:
     - target: {fileID: 4873245859239998471, guid: a71684583ad509136a1eba19bfed5586, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4873245859669713600, guid: a71684583ad509136a1eba19bfed5586, type: 3}
+      propertyPath: m_Text
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4873245860757614228, guid: a71684583ad509136a1eba19bfed5586, type: 3}
+      propertyPath: m_Text
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a71684583ad509136a1eba19bfed5586, type: 3}

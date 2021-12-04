@@ -19,10 +19,10 @@ public class MenuController : MonoBehaviour
 
     public void BuyBag()
     {
-        if (Player.gold >= 5)
+        if (Player.gold >= 15)
         {
             Player.AddBag();
-            Player.gold -= 5;
+            Player.gold -= 15;
             RemaController.BagsLeft -= 1;
             if (RemaController.BagsLeft <= 0)
             {
@@ -33,9 +33,9 @@ public class MenuController : MonoBehaviour
 
     public void BuyCorny()
     {
-        if (Player.gold >= 3)
+        if (Player.gold >= 5)
         {
-            Player.gold -= 3;
+            Player.gold -= 5;
             Player.HOLDBEFOREDIG *= 0.9f;
         }
     }
