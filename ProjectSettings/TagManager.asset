@@ -7,6 +7,7 @@ TagManager:
   - GridController
   - Block
   - Cloud
+  - Pillar
   layers:
   - Default
   - TransparentFX
