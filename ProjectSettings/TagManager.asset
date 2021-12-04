@@ -6,14 +6,16 @@ TagManager:
   tags:
   - GridController
   - Block
+  - Cloud
+  - Pillar
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Environment
+  - 
   - Water
   - UI
-  - 
+  - Cloud
   - 
   - 
   - 
