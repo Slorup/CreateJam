@@ -1589,6 +1589,7 @@ MonoBehaviour:
   cloud1Chance: 0.2
   cloud2Chance: 0.6
   cloud3Chance: 1
+  cloud4Chance: 1
   cloud1: {fileID: 6997549654468479768, guid: d31dd648a05aefb77923701368c589f5, type: 3}
   cloud2: {fileID: 3533372614309225879, guid: b7c879736bcc09de5a9f266bbeec0f1d, type: 3}
   cloud3: {fileID: 22171624146236185, guid: 5f964c74a078c94a98fe105b848ad569, type: 3}
@@ -1632,7 +1633,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.000053406, y: -0.0000038147}
-  m_SizeDelta: {x: 1031, y: 544}
+  m_SizeDelta: {x: 4000, y: 4000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1437106070
 MonoBehaviour:
