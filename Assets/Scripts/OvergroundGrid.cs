@@ -19,7 +19,7 @@ public class OvergroundGrid : MonoBehaviour
     public GameObject cloudTop;
     public GameObject pillar;
     public GameObject rema;
-
+    public GameObject zeus;
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +72,7 @@ public class OvergroundGrid : MonoBehaviour
                 
             }
         }
+        
     }
 
     // Update is called once per frame
