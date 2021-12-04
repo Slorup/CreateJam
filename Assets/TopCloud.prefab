@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 659291233734960254}
   - component: {fileID: 3077689800621393041}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopCloud
-  m_TagString: Untagged
+  m_TagString: Cloud
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
