@@ -22,10 +22,11 @@ public class MenuController : MonoBehaviour
         if (Player.gold >= 5)
         {
             Player.AddBag();
+            Player.gold -= 5;
             RemaController.BagsLeft -= 1;
             if (RemaController.BagsLeft <= 0)
             {
-                Destroy(transform.Find("BagItem"));
+                Destroy(transform.Find("BagItem").gameObject);
             }
         }
     }
@@ -34,6 +35,7 @@ public class MenuController : MonoBehaviour
     {
         if (Player.gold >= 3)
         {
+            Player.gold -= 3;
             Player.HOLDBEFOREDIG *= 0.9f;
         }
     }
