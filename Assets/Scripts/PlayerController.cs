@@ -6,6 +6,7 @@ using DefaultNamespace;
 using Unity.Mathematics;
 using UnityEditor.U2D;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
@@ -98,7 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         var b = Instantiate(bagPrefab, bagsOBJ.transform);
         b.transform.localPosition = bags.Count * Vector2.left * 100f;
-        bags.Add(new BagO2(b.transform.Find("Square"), 0.0f));
+        bags.Add(new BagO2(b.transform.Find("Square"), 0.1f));
     }
 
     // Update is called once per frame
@@ -124,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
         if (o2loss > 0f)
         {
-            // TODO: DIE
+            SceneManager.LoadScene("DeathScreen");
         }
 
         if (bags.Last().o2 < 0.5f)
@@ -150,11 +151,6 @@ public class PlayerController : MonoBehaviour
         
         setHeightText();
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            transform.position = new Vector3(10, 131, 0);
-            marble = 1000;
-        }
     }
 
     private void setHeightText()
@@ -344,7 +340,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Zeus")
         {
             //WIN
-            Debug.Log("GG");
+            SceneManager.LoadScene("WinScreen");
         }
     }
 }

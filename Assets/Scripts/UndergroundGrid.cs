@@ -24,19 +24,22 @@ public class UndergroundGrid : MonoBehaviour
 
     private GameObject blocksGO;
 
+
     void Start()
     {
+        
+        float offset = Random.Range(0, 1000);
         blocksGO = Instantiate(new GameObject("Blocks"));
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < depth; y++)
             {
-                if (y < 2 || Mathf.PerlinNoise(x * noiseScale, y * noiseScale) > threshold)
+                if (y < 2 || Mathf.PerlinNoise(x * noiseScale + offset, y * noiseScale + offset) > threshold)
                 {
                     GameObject block;
-                    if (Mathf.PerlinNoise(x * marbleNoiseScale, y * marbleNoiseScale) > marbleThreshold)
+                    if (Mathf.PerlinNoise(x * marbleNoiseScale + offset, y * marbleNoiseScale + offset) > marbleThreshold)
                         block = marble;
-                    else if (Mathf.PerlinNoise(x * goldNoiseScale, y * goldNoiseScale) > goldThreshold - goldPropIncrease * y)
+                    else if (Mathf.PerlinNoise(x * goldNoiseScale + offset, y * goldNoiseScale + offset) > goldThreshold - goldPropIncrease * y)
                         block = gold;
                     else
                         block = dirt;
