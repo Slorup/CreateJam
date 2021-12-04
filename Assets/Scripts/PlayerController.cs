@@ -79,15 +79,6 @@ public class PlayerController : MonoBehaviour
             body.velocity = new Vector2(MAXHORIZONTALVELOCITY, body.velocity.y);
         if (body.velocity.x < -MAXHORIZONTALVELOCITY)
             body.velocity = new Vector2(-MAXHORIZONTALVELOCITY, body.velocity.y);
-        
-        //Grounded
-        /*if (body.velocity.y > 0.01)
-        {
-            //Debug.Log("UNGROUNDED");
-            IsGrounded = false;
-        }*/
-
-        //if (blocksUnder.Count == 0) IsGrounded = false;
 
         //Stand still timer
         if (Math.Abs(body.velocity.x) < 0.001 && Math.Abs(body.velocity.y) < 0.001)
@@ -114,76 +105,35 @@ public class PlayerController : MonoBehaviour
         //Dig
         if (timeStandStill > HOLDBEFOREDIG)
         {
+            CircleCollider2D col = GetComponent<CircleCollider2D>();
             if (holdDownTime > HOLDBEFOREDIG)
             {
                 //Dig down
-                GameObject block = blocksUnder.Find(o =>
-                    o.transform.position.x == Math.Round(transform.position.x) &&
-                    o.transform.position.y == Math.Floor(transform.position.y));
-                
-                if (block != null)
-                {
-                    blocksUnder.Remove(block);
-                    
-                    Destroy(block);
-                }
+                RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, Vector2.down, 0.4f);
+                if(raycastHit2D)
+                    Destroy(raycastHit2D.collider.gameObject);
             }
             
             if (holdRightTime > HOLDBEFOREDIG)
             {
                 //Dig right
-                GameObject block = blocksRight.Find(o =>
-                    o.transform.position.x == Math.Ceiling(transform.position.x) &&
-                    o.transform.position.y == Math.Ceiling(transform.position.y));
-                
-                if (block != null)
-                {
-                    blocksRight.Remove(block);
-                    Destroy(block);
-                }
+                RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, Vector2.right, 0.4f);
+                if(raycastHit2D)
+                    Destroy(raycastHit2D.collider.gameObject);
             }
 
             if (holdLeftTime > HOLDBEFOREDIG)
             {
                 //Dig left
-                GameObject block = blocksLeft.Find(o =>
-                    o.transform.position.x == Math.Floor(transform.position.x) &&
-                    o.transform.position.y == Math.Ceiling(transform.position.y));
-                
-                if (block != null)
-                {
-                    blocksLeft.Remove(block);
-                    Destroy(block);
-                }
+                RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, Vector2.left, 0.4f);
+                if(raycastHit2D)
+                    Destroy(raycastHit2D.collider.gameObject);
             }
         }
         
         Debug.Log(timeStandStill);
         
         //Debug.Log("Under: " + blocksUnder.Count + " Left: " + blocksLeft.Count + " Right: " + blocksRight.Count);
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        Debug.Log("Collision with ground: " + other.transform.position + "Velocity: " + GetComponent<Rigidbody2D>().velocity);
-        if (other.gameObject.CompareTag("Block"))
-        {
-            if (transform.position.y > other.transform.position.y)
-            {
-                blocksUnder.Add(other.gameObject);
-            }
-            else
-            {
-                if (transform.position.x > other.transform.position.x)
-                {
-                    blocksLeft.Add(other.gameObject);
-                }
-                else
-                {
-                    blocksRight.Add(other.gameObject);
-                }
-            }
-        }
     }
     
     private bool IsGrounded()
@@ -195,20 +145,4 @@ public class PlayerController : MonoBehaviour
         return raycastHit2D;
     }
 
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Block"))
-        {
-            if (blocksUnder.Contains(other.gameObject))
-            {
-                blocksUnder.Remove(other.gameObject);
-            }
-
-            if (blocksLeft.Contains(other.gameObject))
-                blocksLeft.Remove(other.gameObject);
-
-            if (blocksRight.Contains(other.gameObject))
-                blocksRight.Remove(other.gameObject);
-        }
-    }
 }
