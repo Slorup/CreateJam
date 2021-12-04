@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("DeathScreen");
         }
 
-        if (bags.Last().o2 < 0.5f)
+        if (bags.Sum(b => b.o2) < 0.5f)
         {
             var c = HurtImage.color;
             HurtImage.color = new Color(c.r, c.g, c.b, 0.5f - bags.Last().o2);
