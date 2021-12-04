@@ -55,10 +55,10 @@ public class UndergroundGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - Mathf.Round(Time.time) < 0.01f)
-        {
-            Destroy(blocksGO);
-            Start();
-        }
+        // if (Time.time - Mathf.Round(Time.time) < 0.01f)
+        // {
+        //     Destroy(blocksGO);
+        //     Start();
+        // }
     }
 }
