@@ -26,6 +26,9 @@ public class UndergroundGrid : MonoBehaviour
                 if (Mathf.PerlinNoise(x * noiseScale, y * noiseScale) > threshold)
                 {
                     blocks[x, y] = Instantiate(block, new Vector3(x, y, 0), Quaternion.identity).GetComponent<Block>();
+                    blocks[x, y].tag = "Block";
+                    blocks[x, y].gameObject.AddComponent<BoxCollider2D>();
+
                 }
                 
             }
