@@ -35,12 +35,18 @@ public class PlayerController : MonoBehaviour
     private int marble;
     private int gold;
 
+    public Sprite idleSprite;
+    public Sprite leftSprite;
+    public Sprite rightSprite;
+    public Sprite downSprite;
+
     public Text goldText;
     public Text marbleText;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = idleSprite;
         lastJumpTime = Time.time;
         timeStandStill = 0;
         holdDownTime = 0;
@@ -70,13 +76,19 @@ public class PlayerController : MonoBehaviour
         if (moveRight && !moveLeft)
         {
             body.AddForce(new Vector2(HORIZONTALFORCE, 0));
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
+            gameObject.GetComponent<SpriteRenderer>().sprite = rightSprite;
         }
         if (!moveRight && moveLeft)
         {
             body.AddForce(new Vector2(-HORIZONTALFORCE, 0));
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
+            gameObject.GetComponent<SpriteRenderer>().sprite = leftSprite;
         }
+        
+        if(!moveDown && !moveLeft && !moveRight && !moveDown)
+            gameObject.GetComponent<SpriteRenderer>().sprite = idleSprite;
+        
+        if(IsGrounded() && moveDown && !moveRight && !moveLeft && !moveUp)
+            gameObject.GetComponent<SpriteRenderer>().sprite = downSprite;
         
         // Jump through cloud
         Physics2D.IgnoreLayerCollision(2, 6, body.velocity.y > 0);
@@ -96,7 +108,9 @@ public class PlayerController : MonoBehaviour
 
         //Stand still timer
         if (Math.Abs(body.velocity.x) < 0.001 && Math.Abs(body.velocity.y) < 0.001)
+        {
             timeStandStill += Time.deltaTime;
+        }
         else 
             timeStandStill = 0;
 
