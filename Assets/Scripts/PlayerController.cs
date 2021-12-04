@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     public Sprite downSprite;
 
     public GameObject pillar;
+    private GameObject pillars;
 
     public Text goldText;
     public Text marbleText;
@@ -64,6 +65,8 @@ public class PlayerController : MonoBehaviour
         holdDownTime = 0;
         holdLeftTime = 0;
         holdRightTime = 0;
+        pillars = Instantiate(new GameObject("Pillars"));
+        Instantiate(pillar, new Vector3(transform.position.x + 10, transform.position.y, 0), Quaternion.identity, pillars.transform);
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
@@ -80,6 +83,29 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P) && IsGrounded() && (Time.time - lastPillarPlacement) > PILLARPLACEMENTCOOLDOWN)
             TryPlacePillar();
+
+        if (Input.GetKeyDown(KeyCode.T))
+            TeleportToHighestPillar();
+    }
+
+    private void TeleportToHighestPillar()
+    {
+        if (pillars.transform.childCount == 0)
+        {
+            transform.position = new Vector3(1, 1, 0);
+            return;
+        }
+        
+        Transform highestPillar = pillars.transform.GetChild(0);
+        
+        for (int i = 1; i < pillars.transform.childCount; i++)
+        {
+            Transform current = pillars.transform.GetChild(i);
+            if (current.position.y > highestPillar.position.y)
+                highestPillar = current;
+        }
+
+        transform.position = highestPillar.position + Vector3.up;
     }
 
     private void TryPlacePillar()
@@ -93,7 +119,7 @@ public class PlayerController : MonoBehaviour
             //float pillarY = body.position.y + 0.1f;
             //if (lastHorizontalMovement == HorizontalMovement.Left) pillarX -= 1;
 
-            var p = Instantiate(pillar, new Vector3(pillarX, pillarY, 0), Quaternion.identity);
+            Instantiate(pillar, new Vector3(pillarX, pillarY, 0), Quaternion.identity, pillars.transform);
             lastPillarPlacement = Time.time;
             marble -= PILLARCOST;
         }
