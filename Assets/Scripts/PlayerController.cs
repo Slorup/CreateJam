@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     public static float JUMPFORCE = 250;
     public static float JUMPTIMEDELAY = 0.1f; //Seconds
     public static float MAXHORIZONTALVELOCITY = 5;
-    public static float HOLDBEFOREDIG = 0.2f; //Seconds
+    public float HOLDBEFOREDIG = 0.5f; //Seconds
     public static float PILLARPLACEMENTCOOLDOWN = 0.2f; //Seconds
     public static int PILLARCOST = 1; //MARBLE
 
@@ -54,8 +54,8 @@ public class PlayerController : MonoBehaviour
     private float holdLeftTime;
     private float holdRightTime;
 
-    private int marble;
-    private int gold;
+    public int marble;
+    public int gold;
 
     public Sprite idleSprite;
     public Sprite leftSprite;
@@ -90,10 +90,10 @@ public class PlayerController : MonoBehaviour
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
-    void AddBag()
+    public void AddBag()
     {
         var b = Instantiate(bagPrefab, bagsOBJ.transform);
-        b.transform.localPosition = bags.Count * Vector2.left * 0.8f;
+        b.transform.localPosition = bags.Count * Vector2.left * 100f;
         bags.Add(new BagO2(b.transform.Find("Square"), 0.0f));
     }
 
