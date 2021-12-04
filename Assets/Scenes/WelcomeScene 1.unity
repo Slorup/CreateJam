@@ -438,8 +438,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Help Hercules reunite with Zeus. Dig for barble ores and build your way
-    back to Olympia.
+  m_Text: Help Hercules reunite with Zeus. Dig for marble and gold and build your
+    way back to Olympia.
 --- !u!222 &920239021
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -749,8 +749,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 262, y: -91.735}
-  m_SizeDelta: {x: 351.6, y: 259.93}
+  m_AnchoredPosition: {x: 241.73, y: -91.735}
+  m_SizeDelta: {x: 392.15, y: 259.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1163111020
 MonoBehaviour:
@@ -786,7 +786,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Use the arrows to move. \nLeft, right and down digs. \nBuild a marble
-    pillar [b].\nBuy upgrades in Rema."
+    pillar [b].\nTeleport to highest pillar [t].\nBuy upgrades in Rema."
 --- !u!222 &1163111021
 CanvasRenderer:
   m_ObjectHideFlags: 0
