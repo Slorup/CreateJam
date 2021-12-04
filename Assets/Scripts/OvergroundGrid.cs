@@ -22,9 +22,9 @@ public class OvergroundGrid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(pillar, new Vector3(20,1), Quaternion.identity);
-        Instantiate(pillar, new Vector3(21,1), Quaternion.identity);
-        Instantiate(pillar, new Vector3(21,2), Quaternion.identity);
+        //Instantiate(pillar, new Vector3(20,1), Quaternion.identity);
+        //Instantiate(pillar, new Vector3(21,1), Quaternion.identity);
+        //Instantiate(pillar, new Vector3(21,2), Quaternion.identity);
 
         Instantiate(cloud3, new Vector3(2, 2), Quaternion.identity);
         
@@ -44,7 +44,7 @@ public class OvergroundGrid : MonoBehaviour
                 }
                 else if (cloudSpecifier < cloud3Chance && x + 2 <= width)
                 {
-                        Instantiate(cloud3, new Vector3(x, y), Quaternion.identity);
+                    Instantiate(cloud3, new Vector3(x, y), Quaternion.identity);
                 }
 
                 y += 3;
