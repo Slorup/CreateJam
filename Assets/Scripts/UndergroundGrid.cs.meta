@@ -3,7 +3,10 @@ guid: 93fee7c34052b5570ac76ae738e52a60
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - dirt: {fileID: 1344464598582219287, guid: 215b16fa6f851eaf686398bddc10c441, type: 3}
+  - marble: {fileID: 219669882847113181, guid: 5bc40272ee8893b46970261960e64f47, type: 3}
+  - gold: {fileID: 8539974655098599047, guid: ca6ce3ce80bbc847c92ba885d93185d3, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

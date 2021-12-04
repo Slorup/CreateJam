@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         holdLeftTime = 0;
         holdRightTime = 0;
         pillars = Instantiate(new GameObject("Pillars"));
-        Instantiate(pillar, new Vector3(transform.position.x + 10, transform.position.y, 0), Quaternion.identity, pillars.transform);
+        Instantiate(pillar, new Vector3(10, 1, 0), Quaternion.identity, pillars.transform);
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
@@ -140,6 +140,12 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
             TeleportToHighestPillar();
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            transform.position = new Vector3(10, 131, 0);
+            marble = 1000;
+        }
     }
 
     private void TeleportToHighestPillar()
@@ -305,6 +311,16 @@ public class PlayerController : MonoBehaviour
         if (other.TryGetComponent<RemaController>(out rc))
         {
             rc.CloseMenu();
+        }
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Zeus")
+        {
+            //WIN
+            Debug.Log("GG");
         }
     }
 }
