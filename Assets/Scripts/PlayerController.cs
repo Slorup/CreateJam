@@ -276,4 +276,21 @@ public class PlayerController : MonoBehaviour
         return raycastHit2D;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        RemaController rc;
+        if (other.TryGetComponent<RemaController>(out rc))
+        {
+            rc.OpenMenu();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        RemaController rc;
+        if (other.TryGetComponent<RemaController>(out rc))
+        {
+            rc.CloseMenu();
+        }
+    }
 }
