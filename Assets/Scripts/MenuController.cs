@@ -9,6 +9,7 @@ public class MenuController : MonoBehaviour
     public Transform Bag;
 
     public PlayerController Player;
+    public RemaController RemaController;
     
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,11 @@ public class MenuController : MonoBehaviour
         if (Player.gold >= 5)
         {
             Player.AddBag();
+            RemaController.BagsLeft -= 1;
+            if (RemaController.BagsLeft <= 0)
+            {
+                Destroy(transform.Find("BagItem"));
+            }
         }
     }
 

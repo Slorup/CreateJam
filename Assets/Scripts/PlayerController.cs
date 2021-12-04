@@ -8,6 +8,7 @@ using UnityEditor.U2D;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 using Random = UnityEngine.Random;
 
 class BagO2
@@ -67,6 +68,8 @@ public class PlayerController : MonoBehaviour
 
     public Text goldText;
     public Text marbleText;
+
+    public Image HurtImage;
     
     public GameObject bagsOBJ;
     public GameObject bagPrefab;
@@ -116,6 +119,17 @@ public class PlayerController : MonoBehaviour
 
             if (Mathf.Abs(transform.position.y) < 10f)
                 b.o2 = 1.0f;
+        }
+
+        if (o2loss > 0f)
+        {
+            // TODO: DIE
+        }
+
+        if (bags.Last().o2 < 0.5f)
+        {
+            var c = HurtImage.color;
+            HurtImage.color = new Color(c.r, c.g, c.b, 0.5f - bags.Last().o2);
         }
     }
 
@@ -276,7 +290,7 @@ public class PlayerController : MonoBehaviour
         return raycastHit2D;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         RemaController rc;
         if (other.TryGetComponent<RemaController>(out rc))
@@ -285,7 +299,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         RemaController rc;
         if (other.TryGetComponent<RemaController>(out rc))
