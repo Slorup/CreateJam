@@ -83,9 +83,12 @@ public class PlayerController : MonoBehaviour
             body.velocity = new Vector2(-HORIZONTALFORCE, body.velocity.y);
             transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
+        
+        // Jump through cloud
+        Physics2D.IgnoreLayerCollision(2, 6, body.velocity.y > 0);
 
         //Jump
-        if (moveUp && !moveDown && IsGrounded() && (Time.time - lastJumpTime) > JUMPTIMEDELAY)
+        if (moveUp && !moveDown && IsGrounded() && (Time.time - lastJumpTime) > JUMPTIMEDELAY && body.velocity.y == 0)
         {
             body.AddForce(new Vector2(0, JUMPFORCE));
             lastJumpTime = Time.time;
