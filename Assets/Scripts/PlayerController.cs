@@ -13,10 +13,10 @@ using Random = UnityEngine.Random;
 public class PlayerController : MonoBehaviour
 {
     public static float HORIZONTALFORCE = 4;
-    public static float JUMPFORCE = 145;
+    public static float JUMPFORCE = 210;
     public static float JUMPTIMEDELAY = 0.1f; //Seconds
     public static float MAXHORIZONTALVELOCITY = 5;
-    public static float HOLDBEFOREDIG = 0.5f; //Seconds
+    public static float HOLDBEFOREDIG = 0.05f; //Seconds
 
     public Vector3 CurrentVelocity { get; set; } = Vector3.zero;
 
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         HandlePlayerMovement();
 
@@ -65,16 +65,22 @@ public class PlayerController : MonoBehaviour
         bool moveLeft = Input.GetKey(KeyCode.LeftArrow);
         bool moveUp = Input.GetKey(KeyCode.UpArrow);
         bool moveDown = Input.GetKey(KeyCode.DownArrow);
+        
+        //Stand still timer
+        if (Math.Abs(body.velocity.x) < 0.001 && Math.Abs(body.velocity.y) < 0.001)
+            timeStandStill += Time.deltaTime;
+        else 
+            timeStandStill = 0;
 
         //Horizontal movement
         if (moveRight && !moveLeft)
         {
-            body.AddForce(new Vector2(HORIZONTALFORCE, 0));
+            body.velocity = new Vector2(HORIZONTALFORCE, body.velocity.y);
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
         if (!moveRight && moveLeft)
         {
-            body.AddForce(new Vector2(-HORIZONTALFORCE, 0));
+            body.velocity = new Vector2(-HORIZONTALFORCE, body.velocity.y);
             transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
 
@@ -90,12 +96,7 @@ public class PlayerController : MonoBehaviour
             body.velocity = new Vector2(MAXHORIZONTALVELOCITY, body.velocity.y);
         if (body.velocity.x < -MAXHORIZONTALVELOCITY)
             body.velocity = new Vector2(-MAXHORIZONTALVELOCITY, body.velocity.y);
-
-        //Stand still timer
-        if (Math.Abs(body.velocity.x) < 0.001 && Math.Abs(body.velocity.y) < 0.001)
-            timeStandStill += Time.deltaTime;
-        else 
-            timeStandStill = 0;
+        
 
         if (moveDown && !moveUp)
             holdDownTime += Time.deltaTime;
