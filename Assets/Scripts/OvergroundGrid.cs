@@ -24,9 +24,9 @@ public class OvergroundGrid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(pillar, new Vector3(20,1), Quaternion.identity);
-        Instantiate(pillar, new Vector3(21,1), Quaternion.identity);
-        Instantiate(pillar, new Vector3(21,2), Quaternion.identity);
+        //Instantiate(pillar, new Vector3(20,1), Quaternion.identity);
+        //Instantiate(pillar, new Vector3(21,1), Quaternion.identity);
+        //Instantiate(pillar, new Vector3(21,2), Quaternion.identity);
 
         Instantiate(cloud3, new Vector3(2, 2), Quaternion.identity);
         Instantiate(rema, new Vector3(10, 1), Quaternion.identity);
