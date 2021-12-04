@@ -6,7 +6,7 @@ public class OvergroundGrid : MonoBehaviour
 {
     public int width = 32;
     public int height = 128;
-    public int startHeight = 10;
+    public int startHeight = 20;
     public float cloudChance = 0.7f;
     public float doubleCloudChance = 0.3f;
     public float cloud1Chance = 0.2f;
@@ -15,8 +15,10 @@ public class OvergroundGrid : MonoBehaviour
     public GameObject cloud1;
     public GameObject cloud2;
     public GameObject cloud3;
+    public GameObject cloud4;
     public GameObject cloudTop;
     public GameObject pillar;
+    public GameObject rema;
 
 
     // Start is called before the first frame update
@@ -27,6 +29,14 @@ public class OvergroundGrid : MonoBehaviour
         Instantiate(pillar, new Vector3(21,2), Quaternion.identity);
 
         Instantiate(cloud3, new Vector3(2, 2), Quaternion.identity);
+        Instantiate(rema, new Vector3(10, 1), Quaternion.identity);
+
+
+        int firstRemaLocation = Mathf.RoundToInt(Random.Range(0f, width-6));
+        Instantiate(cloud4, new Vector3(firstRemaLocation, startHeight - 5f),
+            Quaternion.identity);
+        Instantiate(rema, new Vector3(firstRemaLocation, startHeight - 4f),
+            Quaternion.identity);
         
         for (int y = startHeight; y < height; y++)
         {
@@ -45,6 +55,7 @@ public class OvergroundGrid : MonoBehaviour
                 else if (cloudSpecifier < cloud3Chance && x + 2 <= width)
                 {
                         Instantiate(cloud3, new Vector3(x, y), Quaternion.identity);
+                        //Instantiate(rema, new Vector3(x, y + 1.3f), Quaternion.identity);
                 }
 
                 y += 3;

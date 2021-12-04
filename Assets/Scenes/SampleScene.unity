@@ -1020,8 +1020,10 @@ MonoBehaviour:
   cloud1: {fileID: 6997549654468479768, guid: d31dd648a05aefb77923701368c589f5, type: 3}
   cloud2: {fileID: 3533372614309225879, guid: b7c879736bcc09de5a9f266bbeec0f1d, type: 3}
   cloud3: {fileID: 22171624146236185, guid: 5f964c74a078c94a98fe105b848ad569, type: 3}
+  cloud4: {fileID: 6885072793903537519, guid: b851c3734042ac956a531aeb9dba0664, type: 3}
   cloudTop: {fileID: 3799354398860539058, guid: a8aeeea1ddefee81f8edfa25ecfac425, type: 3}
   pillar: {fileID: 801068048499336651, guid: f13cb68ffd699eaea9ffe83e3fd756bb, type: 3}
+  rema: {fileID: 809496130401897317, guid: cbc5a447046afd503bd88276b2439f7a, type: 3}
 --- !u!1 &1901150535
 GameObject:
   m_ObjectHideFlags: 0
