@@ -6,7 +6,9 @@ using DefaultNamespace;
 using Unity.Mathematics;
 using UnityEditor.U2D;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,7 +31,13 @@ public class PlayerController : MonoBehaviour
     private float holdDownTime;
     private float holdLeftTime;
     private float holdRightTime;
-    
+
+    private int marble;
+    private int gold;
+
+    public Text goldText;
+    public Text marbleText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +53,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandlePlayerMovement();
+
+        goldText.text = gold.ToString();
+        marbleText.text = marble.ToString();
     }
 
     private void HandlePlayerMovement()
@@ -106,28 +117,28 @@ public class PlayerController : MonoBehaviour
         if (timeStandStill > HOLDBEFOREDIG)
         {
             CircleCollider2D col = GetComponent<CircleCollider2D>();
-            if (holdDownTime > HOLDBEFOREDIG)
-            {
-                //Dig down
-                RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, Vector2.down, 0.4f);
-                if(raycastHit2D)
-                    Destroy(raycastHit2D.collider.gameObject);
-            }
-            
-            if (holdRightTime > HOLDBEFOREDIG)
-            {
-                //Dig right
-                RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, Vector2.right, 0.4f);
-                if(raycastHit2D)
-                    Destroy(raycastHit2D.collider.gameObject);
+            Vector3 dir = Vector3.zero;
+            if (holdDownTime > HOLDBEFOREDIG) {
+                dir = Vector3.down;
+            } else if (holdRightTime > HOLDBEFOREDIG) {
+                dir = Vector3.right;
+            } else if (holdLeftTime > HOLDBEFOREDIG) {
+                dir = Vector3.left;
             }
 
-            if (holdLeftTime > HOLDBEFOREDIG)
+            if (dir != Vector3.zero)
             {
-                //Dig left
-                RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, Vector2.left, 0.4f);
-                if(raycastHit2D)
+                RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, dir, 0.4f);
+                Block blockInfo;
+                if (raycastHit2D && raycastHit2D.collider.gameObject.TryGetComponent<Block>(out blockInfo))
+                {
+                    if (blockInfo.blockType == BlockType.Gold)
+                        gold += Mathf.RoundToInt(Random.Range(4, 13));
+                    if (blockInfo.blockType == BlockType.Marble)
+                        marble += 2;
+                    
                     Destroy(raycastHit2D.collider.gameObject);
+                }
             }
         }
         
