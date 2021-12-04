@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/WelcomeScene 1.unity
     guid: 6bef788c371764211b78ad0b79a313f2
   - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 4a859d536249972c7b8c69a550a9835d
+  - enabled: 1
     path: Assets/Scenes/DeathScreen.unity
     guid: bfd9612c17e5a35d9b0729f6c9201904
   - enabled: 1
