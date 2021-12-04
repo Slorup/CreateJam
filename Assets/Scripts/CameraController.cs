@@ -18,20 +18,29 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 candPos = player.transform.position + offset;
-        float nextX = transform.position.x;
-        float nextY = transform.position.y;
-        
-        if (GetComponent<Camera>().rect.xMin >= candPos.x && GetComponent<Camera>().rect.xMax <= candPos.x)
+        if (Camera.main == null)
         {
-            nextX = candPos.x;
-        }
-        
-        if (GetComponent<Camera>().rect.yMin >= candPos.y && GetComponent<Camera>().rect.yMax <= candPos.y)
-        {
-            nextX = candPos.y;
+            return;
         }
 
-        transform.position = new Vector3(nextX, nextY) + offset;
+        Debug.Log($"{player.transform.position}");
+
+        float newX;
+        if (player.transform.position.x < ((Camera.main.pixelWidth/100) / 2))
+        {
+            newX = transform.position.x + offset.x;
+        }
+        else if (player.transform.position.x > 31-((Camera.main.pixelWidth/100) / 2))
+        {
+            newX = transform.position.x + offset.x;
+        }
+        else
+        {
+            newX = player.transform.position.x + offset.x;
+        }
+        
+        
+        transform.position = new Vector3(newX, player.transform.position.y + offset.y, -10f);
+        Debug.Log($"{transform.position}");
     }
 }
