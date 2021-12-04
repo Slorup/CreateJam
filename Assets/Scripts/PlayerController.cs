@@ -10,6 +10,18 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
+class BagO2
+{
+    public Transform bag;
+    public float o2;
+
+    public BagO2(Transform _bag, float _o2)
+    {
+        bag = _bag;
+        o2 = _o2;
+    }
+}
+
 public class PlayerController : MonoBehaviour
 {
     public static float HORIZONTALFORCE = 4;
@@ -37,16 +49,31 @@ public class PlayerController : MonoBehaviour
 
     public Text goldText;
     public Text marbleText;
+    
+    public GameObject bagsOBJ;
+    public GameObject bagPrefab;
+    private List<BagO2> bags = new List<BagO2>();
+
+    public float oxygenDecay;
 
     // Start is called before the first frame update
     void Start()
     {
+        AddBag();
+        
         lastJumpTime = Time.time;
         timeStandStill = 0;
         holdDownTime = 0;
         holdLeftTime = 0;
         holdRightTime = 0;
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    void AddBag()
+    {
+        var b = Instantiate(bagPrefab, bagsOBJ.transform);
+        b.transform.localPosition = bags.Count * Vector2.left * 0.8f;
+        bags.Add(new BagO2(b.transform.Find("Square"), 0.0f));
     }
 
     // Update is called once per frame
@@ -56,6 +83,19 @@ public class PlayerController : MonoBehaviour
 
         goldText.text = gold.ToString();
         marbleText.text = marble.ToString();
+
+
+        var o2loss = oxygenDecay * Mathf.Abs(transform.position.y) * Time.deltaTime;
+        foreach (var b in bags)
+        {
+            b.o2 -= Mathf.Min(o2loss, b.o2);
+            o2loss -= Mathf.Min(o2loss, b.o2);
+
+            b.bag.localPosition = new Vector3(b.bag.localPosition.x, -(1.0f - b.o2) * 0.9f - 0.42f, 1.0f);
+
+            if (Mathf.Abs(transform.position.y) < 10f)
+                b.o2 = 1.0f;
+        }
     }
 
     private void HandlePlayerMovement()
