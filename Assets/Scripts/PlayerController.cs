@@ -151,11 +151,6 @@ public class PlayerController : MonoBehaviour
         
         setHeightText();
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            transform.position = new Vector3(10, 131, 0);
-            marble = 1000;
-        }
     }
 
     private void setHeightText()
