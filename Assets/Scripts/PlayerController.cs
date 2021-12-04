@@ -13,10 +13,12 @@ using Random = UnityEngine.Random;
 public class PlayerController : MonoBehaviour
 {
     public static float HORIZONTALFORCE = 4;
-    public static float JUMPFORCE = 145;
+    public static float JUMPFORCE = 250;
     public static float JUMPTIMEDELAY = 0.1f; //Seconds
     public static float MAXHORIZONTALVELOCITY = 5;
-    public static float HOLDBEFOREDIG = 0.5f; //Seconds
+    public static float HOLDBEFOREDIG = 0.2f; //Seconds
+    public static float PILLARPLACEMENTCOOLDOWN = 0.2f; //Seconds
+    public static int PILLARCOST = 1; //MARBLE
 
     public Vector3 CurrentVelocity { get; set; } = Vector3.zero;
 
@@ -26,7 +28,15 @@ public class PlayerController : MonoBehaviour
 
     //public bool IsGrounded { get; set; } = false;
 
+    enum HorizontalMovement
+    {
+        Left,
+        Right
+    }
+
+    private HorizontalMovement lastHorizontalMovement = HorizontalMovement.Right; 
     private float lastJumpTime;
+    private float lastPillarPlacement;
     private float timeStandStill;
     private float holdDownTime;
     private float holdLeftTime;
@@ -39,6 +49,8 @@ public class PlayerController : MonoBehaviour
     public Sprite leftSprite;
     public Sprite rightSprite;
     public Sprite downSprite;
+
+    public GameObject pillar;
 
     public Text goldText;
     public Text marbleText;
@@ -56,12 +68,35 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         HandlePlayerMovement();
 
         goldText.text = gold.ToString();
         marbleText.text = marble.ToString();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P) && IsGrounded() && (Time.time - lastPillarPlacement) > PILLARPLACEMENTCOOLDOWN)
+            TryPlacePillar();
+    }
+
+    private void TryPlacePillar()
+    {
+        Rigidbody2D body = GetComponent<Rigidbody2D>();
+        if (marble >= PILLARCOST)
+        {
+            float pillarX = body.position.x;
+            float pillarY = body.position.y + 0.15f;
+            //float pillarX = body.position.x + 0.5f;
+            //float pillarY = body.position.y + 0.1f;
+            //if (lastHorizontalMovement == HorizontalMovement.Left) pillarX -= 1;
+
+            var p = Instantiate(pillar, new Vector3(pillarX, pillarY, 0), Quaternion.identity);
+            lastPillarPlacement = Time.time;
+            marble -= PILLARCOST;
+        }
     }
 
     private void HandlePlayerMovement()
@@ -71,17 +106,26 @@ public class PlayerController : MonoBehaviour
         bool moveLeft = Input.GetKey(KeyCode.LeftArrow);
         bool moveUp = Input.GetKey(KeyCode.UpArrow);
         bool moveDown = Input.GetKey(KeyCode.DownArrow);
+        
+        //Stand still timer
+        if (Math.Abs(body.velocity.x) < 0.001 && Math.Abs(body.velocity.y) < 0.001)
+            timeStandStill += Time.deltaTime;
+        else 
+            timeStandStill = 0;
 
         //Horizontal movement
         if (moveRight && !moveLeft)
         {
-            body.AddForce(new Vector2(HORIZONTALFORCE, 0));
+            body.velocity = new Vector2(HORIZONTALFORCE, body.velocity.y);
             gameObject.GetComponent<SpriteRenderer>().sprite = rightSprite;
+            lastHorizontalMovement = HorizontalMovement.Right;
         }
         if (!moveRight && moveLeft)
         {
-            body.AddForce(new Vector2(-HORIZONTALFORCE, 0));
+            body.velocity = new Vector2(-HORIZONTALFORCE, body.velocity.y);
             gameObject.GetComponent<SpriteRenderer>().sprite = leftSprite;
+            lastHorizontalMovement = HorizontalMovement.Left;
+
         }
         
         if(!moveDown && !moveLeft && !moveRight && !moveDown)
@@ -94,7 +138,7 @@ public class PlayerController : MonoBehaviour
         Physics2D.IgnoreLayerCollision(2, 6, body.velocity.y > 0);
 
         //Jump
-        if (moveUp && !moveDown && IsGrounded() && (Time.time - lastJumpTime) > JUMPTIMEDELAY && body.velocity.y == 0)
+        if (moveUp && !moveDown && IsGrounded() && (Time.time - lastJumpTime) > JUMPTIMEDELAY && body.velocity.y <= 0.1)
         {
             body.AddForce(new Vector2(0, JUMPFORCE));
             lastJumpTime = Time.time;
@@ -105,14 +149,6 @@ public class PlayerController : MonoBehaviour
             body.velocity = new Vector2(MAXHORIZONTALVELOCITY, body.velocity.y);
         if (body.velocity.x < -MAXHORIZONTALVELOCITY)
             body.velocity = new Vector2(-MAXHORIZONTALVELOCITY, body.velocity.y);
-
-        //Stand still timer
-        if (Math.Abs(body.velocity.x) < 0.001 && Math.Abs(body.velocity.y) < 0.001)
-        {
-            timeStandStill += Time.deltaTime;
-        }
-        else 
-            timeStandStill = 0;
 
         if (moveDown && !moveUp)
             holdDownTime += Time.deltaTime;
@@ -159,8 +195,6 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        Debug.Log(timeStandStill);
-        
         //Debug.Log("Under: " + blocksUnder.Count + " Left: " + blocksLeft.Count + " Right: " + blocksRight.Count);
     }
     
@@ -169,7 +203,7 @@ public class PlayerController : MonoBehaviour
         CircleCollider2D col = GetComponent<CircleCollider2D>();
         RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, Vector2.down, 0.4f);
         //Debug.DrawRay(col.bounds.center , Vector2.down, Color.red);
-        Debug.Log(raycastHit2D.collider.name);
+        //Debug.Log(raycastHit2D.collider.name);
         return raycastHit2D;
     }
 
