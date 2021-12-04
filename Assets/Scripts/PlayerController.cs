@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 public class PlayerController : MonoBehaviour
 {
     public static float HORIZONTALFORCE = 4;
-    public static float JUMPFORCE = 250;
+    public static float JUMPFORCE = 190;
     public static float JUMPTIMEDELAY = 0.1f; //Seconds
     public static float MAXHORIZONTALVELOCITY = 5;
     public static float HOLDBEFOREDIG = 0.2f; //Seconds
@@ -139,6 +139,9 @@ public class PlayerController : MonoBehaviour
         else 
             timeStandStill = 0;
 
+        if (!moveRight && !moveLeft)
+            body.velocity = new Vector2(0, body.velocity.y);
+        
         //Horizontal movement
         if (moveRight && !moveLeft)
         {
