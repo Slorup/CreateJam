@@ -243,7 +243,7 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().sprite = downSprite;
         
         // Jump through cloud
-        Physics2D.IgnoreLayerCollision(2, 6, body.velocity.y > 0);
+        Physics2D.IgnoreLayerCollision(2, 6, body.velocity.y > 0.1f);
 
         //Jump
         if (moveUp && !moveDown && IsGrounded() && (Time.time - lastJumpTime) > JUMPTIMEDELAY && body.velocity.y <= 0.1)
