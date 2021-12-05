@@ -1,14 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DefaultNamespace;
-using Unity.Mathematics;
-using UnityEditor.U2D;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 using Random = UnityEngine.Random;
 
@@ -48,7 +43,6 @@ public class PlayerController : MonoBehaviour
         Right
     }
 
-    private HorizontalMovement lastHorizontalMovement = HorizontalMovement.Right; 
     private float lastJumpTime;
     private float lastPillarPlacement;
     private float timeStandStill;
@@ -226,14 +220,11 @@ public class PlayerController : MonoBehaviour
         {
             body.velocity = new Vector2(HORIZONTALFORCE, body.velocity.y);
             gameObject.GetComponent<SpriteRenderer>().sprite = rightSprite;
-            lastHorizontalMovement = HorizontalMovement.Right;
         }
         if (!moveRight && moveLeft)
         {
             body.velocity = new Vector2(-HORIZONTALFORCE, body.velocity.y);
             gameObject.GetComponent<SpriteRenderer>().sprite = leftSprite;
-            lastHorizontalMovement = HorizontalMovement.Left;
-
         }
         
         if(!moveDown && !moveLeft && !moveRight && !moveDown)
@@ -243,7 +234,7 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().sprite = downSprite;
         
         // Jump through cloud
-        Physics2D.IgnoreLayerCollision(2, 6, body.velocity.y > 0);
+        Physics2D.IgnoreLayerCollision(2, 6, body.velocity.y > 0.1f);
 
         //Jump
         if (moveUp && !moveDown && IsGrounded() && (Time.time - lastJumpTime) > JUMPTIMEDELAY && body.velocity.y <= 0.1)
@@ -289,7 +280,7 @@ public class PlayerController : MonoBehaviour
 
             if (dir != Vector3.zero)
             {
-                RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, dir, 0.4f);
+                RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, dir, 0.5f);
                 Block blockInfo;
                 if (raycastHit2D && raycastHit2D.collider.gameObject.TryGetComponent<Block>(out blockInfo))
                 {
@@ -309,7 +300,7 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         CircleCollider2D col = GetComponent<CircleCollider2D>();
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, Vector2.down, 0.4f);
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(col.bounds.center, Vector2.down, 0.5f);
         //Debug.DrawRay(col.bounds.center , Vector2.down, Color.red);
         //Debug.Log(raycastHit2D.collider.name);
         return raycastHit2D;
